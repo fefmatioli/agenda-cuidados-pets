@@ -19,7 +19,7 @@ class Evento(models.Model):
 
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='eventos')
     tipo = models.CharField(max_length=20, choices=TIPOS)
-    data = models.DateField()
+    data = models.DateTimeField()
 
     def __str__(self):
         return f'{self.get_tipo_display()} - {self.pet.nome} ({self.data})'
