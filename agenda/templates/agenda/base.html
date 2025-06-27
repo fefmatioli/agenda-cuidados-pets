@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -9,22 +8,19 @@
 </head>
 <body>
     <header>
-        <h1>Agenda de Cuidados com Pets</h1>
-            <nav>
-                <a href="{% url 'home' %}">Início</a>
-                <a href="{% url 'listar_pets' %}">Meus Pets</a>
-                <a href="{% url 'adicionar_pet' %}">Cadastrar Pet</a>
-                <a href="{% url 'listar_eventos' %}">Consultas/Eventos</a>
-                <a href="{% url 'adicionar_evento' %}">Novo Evento</a>
-            </nav>
+        <h1>Olá, Tutor!<br>Bem vindo a sua Agenda de Cuidados Pet ;)</h1>
     </header>
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+    <nav>
+        <a href="{% url 'home' %}">Início</a>
+        <a href="{% url 'listar_pets' %}">Meus Pets</a>
+        <a href="{% url 'adicionar_pet' %}">Cadastrar Pets</a>
+        <a href="{% url 'listar_eventos' %}">Consultas e Eventos</a>
+        <a href="{% url 'adicionar_evento' %}">Novo Evento</a>
+    </nav>
 
-    <footer>
-        <p>&copy; 2025 Agenda Cuidados Pets</p>
-    </footer>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

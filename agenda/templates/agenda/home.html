@@ -1,11 +1,24 @@
 {% extends 'agenda/base.html' %}
 {% block content %}
-  <h2>Próximos Cuidados</h2>
-  <ul>
-    {% for evento in eventos %}
-      <li>{{ evento.data }} - {{ evento.get_tipo_display }} do pet {{ evento.pet.nome }}</li>
-    {% empty %}
-      <li>Sem eventos futuros cadastrados.</li>
-    {% endfor %}
-  </ul>
+
+<div class="cards">
+    <div class="card">
+        <p>Pets Registrados:</p>
+        <h2>{{ pets|length }}</h2>
+    </div>
+    <div class="card">
+        <p>Eventos registrados:</p>
+        <h2>{{ eventos|length }}</h2>
+    </div>
+</div>
+
+<h2>Próximos Eventos:</h2>
+<ul>
+  {% for evento in eventos %}
+    <li>{{ evento.get_tipo_display }} do pet {{ evento.pet.nome }} - {{ evento.data|date:"d/m/Y" }}</li>
+  {% empty %}
+    <li>Sem eventos futuros cadastrados.</li>
+  {% endfor %}
+</ul>
+
 {% endblock %}

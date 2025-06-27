@@ -4,7 +4,12 @@ from .forms import PetForm, EventoForm
 from datetime import date
 
 def home(request):
-    return render(request, 'agenda/home.html')
+    eventos = Evento.objects.filter(data__gte=date.today()).order_by('data')
+    pets = Pet.objects.all()
+    return render(request, 'agenda/home.html', {
+        'eventos': eventos,
+        'pets': pets,
+    })
 
 def listar_pets(request):
     pets = Pet.objects.all()
