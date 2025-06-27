@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Agenda de Cuidados{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Agenda de Cuidados com Pets</h1>
+            <nav>
+                <a href="{% url 'home' %}">Início</a>
+                <a href="{% url 'listar_pets' %}">Meus Pets</a>
+                <a href="{% url 'adicionar_pet' %}">Cadastrar Pet</a>
+                <a href="{% url 'listar_eventos' %}">Consultas/Eventos</a>
+                <a href="{% url 'adicionar_evento' %}">Novo Evento</a>
+            </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Agenda Cuidados Pets</p>
+    </footer>
+</body>
+</html>

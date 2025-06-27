@@ -68,6 +68,9 @@ TEMPLATES = [
     },
 ]
 
+
+TEMPLATES[0]['DIRS'] = [] 
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 

@@ -1,0 +1,14 @@
+{% extends 'agenda/base.html' %}
+{% block content %}
+  <h2>Pets</h2>
+  <a href="{% url 'adicionar_pet' %}">Novo Pet</a>
+  <ul>
+    {% for pet in pets %}
+      <li>
+        {{ pet.nome }} ({{ pet.especie }}, {{ pet.idade }} anos)
+        <a href="{% url 'editar_pet' pet.id %}">Editar</a>
+        <a href="{% url 'remover_pet' pet.id %}">Remover</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
