@@ -1,10 +1,20 @@
 {% extends 'agenda/base.html' %}
 {% block content %}
   <h2>Eventos</h2>
-  <a href="{% url 'adicionar_evento' %}">Novo Evento</a>
-  <ul>
+  <a href="{% url 'adicionar_evento' %}" class="create-buttom">Novo Evento</a>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
     {% for evento in eventos %}
-      <li>{{ evento.data }} - {{ evento.get_tipo_display }} do pet {{ evento.pet.nome }}</li>
+      <div style="border: 1px solid #ccc; border-radius: 12px; padding: 15px 15px 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #fff;">
+        <h4 style="margin: 0 0 10px 0;">{{ evento.nome }}</h4>
+        <p style="margin: 0;">Pet: <strong>{{ evento.pet.nome }}</strong></p>
+        <p style="margin: 5px 0;">Tipo: {{ evento.get_tipo_display }}</p>
+        <p style="margin: 5px 0;">Data: {{ evento.data|date:"d/m/Y H:i" }}</p>
+        <div class="card-buttons">
+          <a href="{% url 'editar_evento' evento.id %}" class="edit-buttom" style="margin-bottom: 0.5rem;">Editar</a>
+          <a href="{% url 'remover_evento' evento.id %}" class="delete-buttom" style="margin-bottom: 0.5rem;">Remover</a>
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}

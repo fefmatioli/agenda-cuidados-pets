@@ -7,18 +7,26 @@
         <h2>{{ pets|length }}</h2>
     </div>
     <div class="card">
-        <p>Eventos registrados:</p>
+        <p>Eventos Futuros:</p>
         <h2>{{ eventos|length }}</h2>
     </div>
 </div>
 
 <h2>Próximos Eventos:</h2>
-<ul>
-  {% for evento in eventos %}
-    <li>{{ evento.get_tipo_display }} do pet {{ evento.pet.nome }} - {{ evento.data|date:"d/m/Y H:i" }}</li>
-  {% empty %}
-    <li>Sem eventos futuros cadastrados.</li>
-  {% endfor %}
-</ul>
+
+{% if eventos %}
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+    {% for evento in eventos %}
+      <div style="border: 1px solid #ccc; border-radius: 12px; padding: 15px 15px 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #fff;">
+        <h4 style="margin: 0 0 10px 0;">{{ evento.nome }}</h4>
+        <p style="margin: 0;">Pet: <strong>{{ evento.pet.nome }}</strong></p>
+        <p style="margin: 5px 0;">Tipo: {{ evento.get_tipo_display }}</p>
+        <p style="margin: 5px 0;">Data: {{ evento.data|date:"d/m/Y H:i" }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>Sem eventos futuros cadastrados.</p>
+{% endif %}
 
 {% endblock %}

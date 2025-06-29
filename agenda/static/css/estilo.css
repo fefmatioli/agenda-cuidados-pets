@@ -3,11 +3,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    color: #111;
+    color: #071928;
 }
 
 header {
-    background-color: #e0e0e0;
+    background-color: #51a3ca;
     padding: 20px;
     text-align: center;
 }
@@ -18,7 +18,7 @@ header h1 {
 }
 
 nav {
-    background-color: #d1d1d1;
+    background-color: #071928;
     padding: 10px 0;
     text-align: center;
 }
@@ -26,7 +26,7 @@ nav {
 nav a {
     margin: 0 15px;
     text-decoration: none;
-    color: #333;
+    color: white;
     font-weight: bold;
 }
 
@@ -47,20 +47,77 @@ nav a:hover {
 }
 
 .card {
-    background-color: #5c6bc0;
+    background-color: #071928;
     color: white;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 16px;
     width: 200px;
     font-size: 1.1em;
 }
 
 .card h2 {
     margin: 10px 0;
+    color: white;
     font-size: 2.5em;
 }
 
 h2, h3 {
     margin-top: 30px;
-    color: #222;
+    color: #071928;
+}
+
+.create-buttom {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #145D84;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.create-buttom:hover {
+    background-color: #114e70;
+}
+
+.edit-buttom {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #145D84;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.edit-buttom:hover {
+    background-color: #114e70;
+}
+
+.delete-buttom {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: white;
+    color: #071928;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.delete-buttom:hover {
+    background-color: red;
+    color: white;
+}
+
+.card-buttons {
+    margin-top: 10px;
 }

@@ -46,6 +46,19 @@ def adicionar_evento(request):
         return redirect('listar_eventos')
     return render(request, 'agenda/form_evento.html', {'form': form})
 
+def editar_evento(request, id):
+    evento = get_object_or_404(Evento, pk=id)
+    form = EventoForm(request.POST or None, instance=evento)
+    if form.is_valid():
+        form.save()
+        return redirect('listar_eventos')
+    return render(request, 'agenda/form_evento.html', {'form': form})
+
+def remover_evento(request, id):
+    evento = get_object_or_404(Evento, pk=id)
+    evento.delete()
+    return redirect('listar_eventos')
+
 def buscar(request):
     termo = request.GET.get('q', '')
     pets = Pet.objects.filter(nome__icontains=termo)

@@ -17,9 +17,10 @@ class Evento(models.Model):
         ('remedio', 'Remédio'),
     ]
 
+    nome = models.CharField(max_length=100, blank=True)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='eventos')
     tipo = models.CharField(max_length=20, choices=TIPOS)
     data = models.DateTimeField()
 
     def __str__(self):
-        return f'{self.get_tipo_display()} - {self.pet.nome} ({self.data})'
+        return f'{self.nome} - {self.get_tipo_display()} - {self.pet.nome} ({self.data})'

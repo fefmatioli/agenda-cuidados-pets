@@ -1,14 +1,27 @@
 {% extends 'agenda/base.html' %}
 {% block content %}
-  <h2>Pets</h2>
-  <a href="{% url 'adicionar_pet' %}">Novo Pet</a>
-  <ul>
+  <h2>Meus Pets</h2>
+
+  <a href="{% url 'adicionar_pet' %}" class="create-buttom">Novo Pet</a>
+
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
     {% for pet in pets %}
-      <li>
-        {{ pet.nome }} ({{ pet.especie }}, {{ pet.idade }} anos)
-        <a href="{% url 'editar_pet' pet.id %}">Editar</a>
-        <a href="{% url 'remover_pet' pet.id %}">Remover</a>
-      </li>
+      <div style="border: 1px solid #ccc; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+        {% if pet.foto %}
+          <img src="{{ pet.foto.url }}" alt="Foto de {{ pet.nome }}" style="width: 100%; height: 180px; object-fit: cover;">
+        {% else %}
+          <div style="width: 100%; height: 180px; background: #eee; display: flex; align-items: center; justify-content: center;">
+            Sem foto
+          </div>
+        {% endif %}
+        <div style="padding: 10px;">
+          <strong>{{ pet.nome }}</strong><br>
+          <span>{{ pet.especie }}, {{ pet.idade }} anos</span><br><br>
+          <a href="{% url 'editar_pet' pet.id %}" class="edit-buttom">Editar</a>
+          <a href="{% url 'remover_pet' pet.id %}" class="delete-buttom">Remover</a>
+        </div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 {% endblock %}
