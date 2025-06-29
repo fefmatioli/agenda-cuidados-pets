@@ -3,20 +3,24 @@
   <h2>Resultado da busca por "{{ termo }}"</h2>
 
   <h3>Pets</h3>
-  <ul>
-    {% for pet in pets %}
-      <li>{{ pet.nome }} ({{ pet.especie }})</li>
-    {% empty %}
-      <li>Nenhum pet encontrado.</li>
-    {% endfor %}
-  </ul>
+  {% if pets %}
+    <ul>
+      {% for pet in pets %}
+        <li><strong>{{ pet.nome }}</strong> ({{ pet.especie }}, {{ pet.idade }} anos)</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhum pet encontrado.</p>
+  {% endif %}
 
   <h3>Eventos</h3>
-  <ul>
-    {% for evento in eventos %}
-      <li>{{ evento.get_tipo_display }} - {{ evento.pet.nome }} em {{ evento.data }}</li>
-    {% empty %}
-      <li>Nenhum evento encontrado.</li>
-    {% endfor %}
-  </ul>
+  {% if eventos %}
+    <ul>
+      {% for evento in eventos %}
+        <li><strong>{{ evento.get_tipo_display }}</strong> do pet {{ evento.pet.nome }} em {{ evento.data|date:"d/m/Y H:i" }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhum evento encontrado.</p>
+  {% endif %}
 {% endblock %}

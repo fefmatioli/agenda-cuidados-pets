@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Pet, Evento
 from .forms import PetForm, EventoForm
 from datetime import date
+import unicodedata #normalização de texto
 
 def home(request):
     eventos = Evento.objects.filter(data__gte=date.today()).order_by('data')
@@ -59,8 +60,19 @@ def remover_evento(request, id):
     evento.delete()
     return redirect('listar_eventos')
 
+def remover_acentos(texto):
+    return unicodedata.normalize('NFKD', texto).encode('ASCII', 'ignore').decode('utf-8')
+
 def buscar(request):
-    termo = request.GET.get('q', '')
-    pets = Pet.objects.filter(nome__icontains=termo)
-    eventos = Evento.objects.filter(tipo__icontains=termo)
-    return render(request, 'agenda/busca.html', {'pets': pets, 'eventos': eventos, 'termo': termo})
+    termo_original = request.GET.get('q', '')
+    termo = remover_acentos(termo_original.lower())
+
+    pets = Pet.objects.filter(nome__icontains=termo_original)
+    eventos = Evento.objects.filter(
+        nome__icontains=termo_original
+    ) | Evento.objects.filter(
+        tipo__icontains=termo
+    ) | Evento.objects.filter(
+        pet__nome__icontains=termo_original
+    )
+    return render(request, 'agenda/busca.html', {'pets': pets, 'eventos': eventos, 'termo': termo_original})

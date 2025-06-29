@@ -15,6 +15,10 @@
         <a href="{% url 'home' %}">Início</a>
         <a href="{% url 'listar_pets' %}">Meus Pets</a>
         <a href="{% url 'listar_eventos' %}">Consultas e Eventos</a>
+        <form action="{% url 'buscar' %}" method="get" class="form-busca">
+            <input type="text" name="q" placeholder="Buscar..." required>
+            <button type="submit" class="emoji-busca">🔍</button>
+        </form>
     </nav>
 
     <div class="container">
