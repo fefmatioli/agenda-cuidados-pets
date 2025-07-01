@@ -1,26 +1,51 @@
 {% extends 'agenda/base.html' %}
 {% block content %}
-  <h2>Resultado da busca por "{{ termo }}"</h2>
+  <div class="container">
+    <h2>Resultado da busca por "{{ termo }}"</h2>
 
-  <h3>Pets</h3>
-  {% if pets %}
-    <ul>
-      {% for pet in pets %}
-        <li><strong>{{ pet.nome }}</strong> ({{ pet.especie }}, {{ pet.idade }} anos)</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Nenhum pet encontrado.</p>
-  {% endif %}
+    <h3>Pets</h3>
+    {% if pets %}
+      <div class="cards">
+        {% for pet in pets %}
+              <div style="border: 1px solid #ccc; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center;">
+            {% if pet.foto %}
+              <img src="{{ pet.foto.url }}" alt="Foto de {{ pet.nome }}" style="width: 100%; height: 180px; object-fit: cover;">
+            {% else %}
+              <div style="width: 100%; height: 180px; background: #eee; display: flex; align-items: center; justify-content: center;">
+                Sem foto
+              </div>
+            {% endif %}
+            <div style="padding: 10px;">
+              <strong>{{ pet.nome }}</strong><br>
+              <span>{{ pet.especie }}, {{ pet.idade }} anos</span><br><br>
+              <a href="{% url 'editar_pet' pet.id %}" class="edit-buttom">Editar</a>
+              <a href="{% url 'remover_pet' pet.id %}" class="delete-buttom">Remover</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Nenhum pet encontrado.</p>
+    {% endif %}
 
-  <h3>Eventos</h3>
-  {% if eventos %}
-    <ul>
-      {% for evento in eventos %}
-        <li><strong>{{ evento.get_tipo_display }}</strong> do pet {{ evento.pet.nome }} em {{ evento.data|date:"d/m/Y H:i" }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>Nenhum evento encontrado.</p>
-  {% endif %}
+    <h3>Eventos</h3>
+    {% if eventos %}
+      <div class="cards">
+        {% for evento in eventos %}
+          <div style="border: 1px solid #ccc; border-radius: 12px; padding: 15px 15px 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #fff;">
+            <h4 style="margin: 0 0 10px 0;">{{ evento.nome }}</h4>
+            <p style="margin: 0;">Pet: <strong>{{ evento.pet.nome }}</strong></p>
+            <p style="margin: 5px 0;">Tipo: {{ evento.get_tipo_display }}</p>
+            <p style="margin: 5px 0;">Data: {{ evento.data|date:"d/m/Y H:i" }}</p>
+            <div class="card-buttons">
+              <a href="{% url 'editar_evento' evento.id %}" class="edit-buttom" style="margin-bottom: 0.5rem;">Editar</a>
+              <a href="{% url 'remover_evento' evento.id %}" class="delete-buttom" style="margin-bottom: 0.5rem;">Remover</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>Nenhum evento encontrado.</p>
+    {% endif %}
+  </div>
 {% endblock %}
